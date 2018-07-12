@@ -1,2 +1,9 @@
 .homepg {
+  background: linear-gradient(
+      rgba(230, 230, 230, 0.637),
+      rgba(185, 185, 185, 0.63)
+    ),
+    url("Home.jpg");
+  height: 100vh;
+  background-size: cover;
 }
