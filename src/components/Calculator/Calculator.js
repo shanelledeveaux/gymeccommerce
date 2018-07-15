@@ -6,13 +6,14 @@ class Calculator extends Component {
     super();
     this.state = {
       gender: "",
-      age: "",
-      height: "",
-      weight: "",
+      age: 0,
+      feet: 0,
+      inches: 0,
       goal: "",
       deficit: "",
       activity: "",
-      intensity: ""
+      intensity: "",
+      calculate: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -23,6 +24,8 @@ class Calculator extends Component {
 
   render() {
     console.log(this.state);
+    var feet = typeof parseInt(this.state.feet);
+
     return (
       <div>
         <form className="calculator">
@@ -32,7 +35,6 @@ class Calculator extends Component {
               type="radio"
               name="gender"
               value="male"
-              checked
               onChange={this.handleChange}
             />
             Male
@@ -49,8 +51,8 @@ class Calculator extends Component {
             <input name="age" onChange={this.handleChange} />
           </div>
           <div>
-            Height:
-            <input name="height" onChange={this.handleChange} />
+            Height: Feet: <input name="feet" onChange={this.handleChange} />
+            Inches: <input name="inches" onChange={this.handleChange} />
           </div>
           <div>
             Weight:
@@ -179,7 +181,11 @@ class Calculator extends Component {
           </div>
           <button className="submitcalc">CALCULATE</button>
         </form>
-        <div>{this.state.age >= 20 ? <div>ADULT</div> : <div>CHILD</div>}</div>
+        <div>
+          BMR:
+          {this.state.gender === "female" ? <div>{feet}</div> : <div>MALE</div>}
+        </div>
+        <div />
       </div>
     );
   }
