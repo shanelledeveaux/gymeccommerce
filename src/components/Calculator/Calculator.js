@@ -22,6 +22,7 @@ class Calculator extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <form className="calculator">
@@ -178,6 +179,7 @@ class Calculator extends Component {
           </div>
           <button className="submitcalc">CALCULATE</button>
         </form>
+        <div>{this.state.age >= 20 ? <div>ADULT</div> : <div>CHILD</div>}</div>
       </div>
     );
   }
