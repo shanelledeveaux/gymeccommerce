@@ -7,3 +7,8 @@
   height: 100vh;
   background-size: cover;
 }
+
+.home_title {
+  font-family: "Megrim", cursive;
+  font-size: 25vh;
+}

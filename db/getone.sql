@@ -1,0 +1,1 @@
+select * from uluproducts where id = $1

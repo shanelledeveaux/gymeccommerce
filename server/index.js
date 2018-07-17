@@ -2,13 +2,17 @@ var express = require("express");
 var bodyParser = require("body-parser");
 const massive = require("massive");
 require("dotenv").config();
+const mc = require("./controller");
 
-const app = express();
+var app = express();
 
-// app.use(bodyParser.json());
-// massive(process.env.CONNECTION_STRING).then(dbInstance =>
-//   app.set("db", dbInstance)
-// );
+app.use(bodyParser.json());
+massive(process.env.CONNECTION_STRING).then(dbInstance =>
+  app.set("db", dbInstance)
+);
+
+app.get("/api/inventory", mc.getAll);
+app.get("/api/inventory/:id", mc.getOne);
 
 const port = 3001;
 app.listen(port, () => {

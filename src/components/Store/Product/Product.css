@@ -1,0 +1,56 @@
+.product {
+  width: 15vw;
+  height: 30vh;
+  margin: 2%;
+  overflow: wrap;
+  box-shadow: 10px 13px 10px -7px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.productimage {
+  width: auto;
+  height: 20vh;
+  /* display: none; */
+}
+
+.description {
+  display: none;
+}
+
+.viewproduct {
+  height: 2vh;
+  width: 4vw;
+  font-size: 13px;
+  border: 0.5px solid black;
+  margin-top: 5%;
+  display: none;
+}
+
+.product:hover {
+  width: 17vw;
+  box-sizing: border-box;
+  /* transition: 0.1s all ease-out; */
+}
+
+.product:hover .description {
+  display: inline;
+  font-size: 15px;
+  height: 10vh;
+  position: relative;
+}
+
+.product:hover .cardinfo {
+  display: none;
+}
+
+.product:hover .productimage {
+  display: none;
+}
+
+.product:hover .viewproduct {
+  display: block;
+}
+
+.cardinfo {
+  background-color: pink;
+}

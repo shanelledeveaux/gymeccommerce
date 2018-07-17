@@ -1,0 +1,8 @@
+.productpage {
+  display: flex;
+  flex-direction: row;
+}
+
+.bigproductimg {
+  height: 70vh;
+}
