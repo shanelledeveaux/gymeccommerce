@@ -22,10 +22,11 @@ class EachProduct extends Component {
     return (
       <div className="productpage">
         <img className="bigproductimg" src={this.state.item.imageurl} />
-        <div>
-          <div>{this.state.item.name}</div>
-          <div>{this.state.item.price}</div>
+        <div className="eachproduct_discriptor">
+          <div className="eachproduct_title">{this.state.item.name}</div>
+          <div className="eachproduct_price">{this.state.item.price}</div>
           <div>{this.state.item.description}</div>
+          <button className="addtocart">Add To Cart</button>
         </div>
       </div>
     );
