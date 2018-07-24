@@ -35,7 +35,27 @@ class Store extends Component {
         />
       );
     });
-    return <div className="store">{items}</div>;
+    return (
+      <div>
+        <div className="store">
+          Shop By Category:
+          <select name="category" onChange={this.handleChange}>
+            <option value="protien">Protein</option>
+            <option value="clothing">Clothing</option>
+            <option value="gym">Gym Accessories</option>
+          </select>
+        </div>
+        <div>
+          Sort By:
+          <select name="order" onChange={this.handleChange}>
+            <option value="priceLTH">Low To High</option>
+            <option value="priceHTL">High To Low</option>
+            <option value="sale">On Sale</option>
+          </select>
+        </div>
+        <div className="products">{items}</div>
+      </div>
+    );
   }
 }
 
