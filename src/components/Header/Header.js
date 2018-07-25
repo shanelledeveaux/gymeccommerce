@@ -1,20 +1,37 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-var Header = () => {
-  return (
-    <div className="header">
-      <div className="title">ULU</div>
-      <div className="links">
-        <Link to="/">HOME</Link>
-        <Link to="/store">STORE</Link>
-        <Link to="/schedule">SCHEDULE</Link>
-        <Link to="/calculator">CALCULATOR</Link>
+class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: []
+    };
+  }
+
+  loginHandle = () => {
+    window.location.href = "http://localhost:3001/login";
+  };
+
+  render() {
+    return (
+      <div className="header">
+        <div className="title">
+          <Link to="/">ULU</Link>
+        </div>
+        <div className="links">
+          <Link to="/store">STORE</Link>
+          <Link to="/schedule">SCHEDULE</Link>
+          <Link to="/calculator">CALCULATOR</Link>
+        </div>
+        <button onClick={this.loginHandle} className="loginbtn">
+          MEMBER SIGN IN
+        </button>
       </div>
-      <button className="loginbtn">MEMBER SIGN IN</button>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Header;

@@ -6,6 +6,8 @@
     url("Home.jpg");
   height: 100vh;
   background-size: cover;
+  display: flex;
+  flex-direction: row;
 }
 
 .home_title {

@@ -3,12 +3,15 @@ var bodyParser = require("body-parser");
 const massive = require("massive");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
-// const express = require("express");
 const session = require("express-session");
+const cors = require("cors");
 require("dotenv").config();
 const mc = require("./controller");
 
 var app = express();
+
+app.use(bodyParser.json());
+app.use(cors());
 
 app.use(
   session({
@@ -18,7 +21,6 @@ app.use(
   })
 );
 
-app.use(bodyParser.json());
 massive(process.env.CONNECTION_STRING).then(dbInstance =>
   app.set("db", dbInstance)
 );
@@ -42,15 +44,20 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  console.log(user);
+  //console.log(user);
   app
     .get("db")
-    .get_user(user.id)
+    .getuser(user.id)
     .then(response => {
       if (!response[0]) {
         app
           .get("db")
-          .add_user([user.displayName, user.id, user.emails[0].value])
+          .adduser([
+            user.displayName,
+            user.id,
+            user.emails[0].value,
+            user.picture
+          ])
           .then(res => {
             return done(null, res[0]);
           })
@@ -62,23 +69,18 @@ passport.serializeUser((user, done) => {
     .catch(err => console.log(err));
 });
 
-passport.deserializeUser((obj, done) => {
+passport.deserializeUser((user, done) => {
   //This new object will then be passed on to deserializeUser when done is invoked. Since we don't have any additional logic to execute, simply call done with null and obj.
   done(null, obj);
 });
 
 app.get(
   "/login",
-  //We'll want to call passport.authenticate and pass in a strategy type and configuration object. The strategy type will be 'auth0' since we are using an auth0 strategy.
-  passport.authenticate(
-    "auth0",
-    //Then, in the configuration object we can specify the success and failure redirects, turn failure flash on, and force the connection type to GitHub. We can do all of these by using the following properties in the configuration object: successRedirect, failureRedirect, and connection. The success redirect should go to '/students'; The failure redirect should go to '/login'; The connection should be set to 'github'.
-    {
-      successRedirect: "/students",
-      failtureRedirect: "/login",
-      connection: "github"
-    }
-  )
+
+  passport.authenticate("auth0", {
+    successRedirect: "http://localhost:3000/#/",
+    failureRedirect: "/login"
+  })
 );
 
 function authenticated(req, res, next) {
