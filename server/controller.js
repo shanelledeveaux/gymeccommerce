@@ -1,5 +1,7 @@
 const axios = require("axios");
 
+//PRODUCTS
+
 const getAll = (req, res, next) => {
   const dbInstance = req.app.get("db");
 
@@ -20,7 +22,19 @@ const getOne = (req, res, next) => {
     .catch(console.log);
 };
 
+//CART
+
+const addItemToCart = (req, res, next) => {
+  const dbInstance = req.app.get("db");
+  // console.log(req.user);
+  dbInstance
+    .addToCart([req.user.id, req.body.id, req.body.quantity])
+    .then(response => res.status(200).json(response))
+    .catch(err => res.status(500).json(err));
+};
+
 module.exports = {
   getAll,
-  getOne
+  getOne,
+  addItemToCart
 };

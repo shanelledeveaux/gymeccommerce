@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 
 class Header extends Component {
   constructor() {
@@ -12,7 +12,9 @@ class Header extends Component {
   }
 
   loginHandle = () => {
-    window.location.href = "http://localhost:3001/login";
+    (window.location.href = "http://localhost:3001/login").then(res => {
+      console.log(res);
+    });
   };
 
   render() {

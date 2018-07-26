@@ -44,7 +44,8 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  //console.log(user);
+  // console.log(user);
+  console.log(req.session);
   app
     .get("db")
     .getuser(user.id)
@@ -59,10 +60,12 @@ passport.serializeUser((user, done) => {
             user.picture
           ])
           .then(res => {
+            // console.log(res);
             return done(null, res[0]);
           })
           .catch(err => console.log(err));
       } else {
+        // console.log(res);
         return done(null, response[0]);
       }
     })
@@ -91,8 +94,12 @@ function authenticated(req, res, next) {
   }
 }
 
+//PRODUCT ENDPOINTS
 app.get("/api/inventory", mc.getAll);
 app.get("/api/inventory/:id", mc.getOne);
+
+//CART ENDPOINTS
+app.get("/api/cart", mc.addItemToCart);
 
 const port = 3001;
 app.listen(port, () => {
