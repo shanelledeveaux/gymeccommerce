@@ -34,14 +34,15 @@ class EachProduct extends Component {
 
   render() {
     let { quantity } = this.state;
+    let { imageurl, name, price, description } = this.state.item;
 
     return (
       <div className="productpage">
-        <img className="bigproductimg" src={this.state.item.imageurl} />
+        <img className="bigproductimg" src={imageurl} />
         <div className="eachproduct_discriptor">
-          <div className="eachproduct_title">{this.state.item.name}</div>
-          <div className="eachproduct_price">{this.state.item.price}</div>
-          <div>{this.state.item.description}</div>
+          <div className="eachproduct_title">{name}</div>
+          <div className="eachproduct_price">{price}</div>
+          <div>{description}</div>
           <div>
             Quantity:
             <button onClick={() => this.add()}>+</button>

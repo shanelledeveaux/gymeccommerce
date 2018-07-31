@@ -45,7 +45,7 @@ passport.use(
 
 passport.serializeUser((user, done) => {
   // console.log(user);
-  console.log(req.session);
+  // console.log(req.session);
   app
     .get("db")
     .getuser(user.id)
@@ -74,7 +74,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((user, done) => {
   //This new object will then be passed on to deserializeUser when done is invoked. Since we don't have any additional logic to execute, simply call done with null and obj.
-  done(null, obj);
+  return done(null, user);
 });
 
 app.get(
@@ -100,6 +100,13 @@ app.get("/api/inventory/:id", mc.getOne);
 
 //CART ENDPOINTS
 app.get("/api/cart", mc.addItemToCart);
+app.get("/get-user", (req, res) => {
+  if (req.user) {
+    res.status(200).send(req.user);
+  } else {
+    res.status(401).send({ message: "Please login" });
+  }
+});
 
 const port = 3001;
 app.listen(port, () => {
